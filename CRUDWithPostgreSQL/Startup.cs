@@ -45,6 +45,7 @@ namespace CRUDWithPostgreSQL
             services.AddDbContext<ApplicationDBContext>(options =>
             options.UseNpgsql(Configuration.GetConnectionString("DefaultConnection")));
 
+            services.AddHealthChecks();
             services.AddControllers();
         }
 
@@ -58,6 +59,8 @@ namespace CRUDWithPostgreSQL
             {
                 app.UseDeveloperExceptionPage();
             }
+
+            app.UseHealthChecks("/health");
 
             app.UseRouting();
 
